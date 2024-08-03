@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Jira API'sine istek gönderme
+      var jiraUrl = "https://YOUR_JIRA_INSTANCE/rest/api/2/search?jql=project=YOUR_PROJECT_KEY";
+      $.ajax({
+        url: jiraUrl,
+        method: "GET",
+        headers: {
+          "Authorization": "Basic " + btoa("YOUR_USERNAME:YOUR_API_TOKEN")
+        },
+        success: function(data) {
+          var issues = data.issues;
+          var labels = [];
+          for (var i = 0; i < issues.length; i++) {
+            labels = labels.concat(issues[i].fields.labels);
+          }
+          var uniqueLabels = [...new Set(labels)];
+          $('#labels').html(uniqueLabels.join(', '));
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <h2>Project Labels</h2>
+  <div id="labels">Loading...</div>
+</body>
+</html>

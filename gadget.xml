@@ -1,0 +1,9 @@
+<Module>
+  <ModulePrefs title="Project Labels Gadget">
+    <Require feature="dynamic-height"/>
+    <Require feature="views" />
+    <Require feature="core-v1" />
+    <Require feature="oauthpopup" />
+  </ModulePrefs>
+  <Content type="html" view="default" href="index.html"/>
+</Module>
